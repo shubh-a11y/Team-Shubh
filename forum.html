@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discussion Forum - StudyConnect</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Header Section -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="logo.png" alt="Team SHUBH Logo" class="logo">
+      <h1>StudyConnect Forum</h1>
+    </div>
+    <nav class="navigation">
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav">Home</a></li>
+        <li><a href="#" class="nav">Categories</a></li>
+        <li><a href="#" class="nav">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Discussion Topics Section -->
+  <section class="forum">
+    <h2>Discussion Topics</h2>
+
+    <!-- List of Topics -->
+    <div class="topic-list" id="topic-list">
+      <!-- Dynamic topics will be added here -->
+    </div>
+
+    <!-- New Topic Form -->
+    <form id="new-topic-form" class="new-topic-form">
+      <h3>Create a New Topic</h3>
+      <input type="text" id="topic-title" placeholder="Topic Title" required>
+      <textarea id="topic-content" placeholder="Enter your message here..." required></textarea>
+      <button type="submit">Post Topic</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="#">Terms & Conditions</a> |
+      <a href="#">Privacy Policy</a> |
+      <a href="#">Contact Us</a>
+    </div>
+    <p>&copy; 2024 Team SHUBH. All Rights Reserved.</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
