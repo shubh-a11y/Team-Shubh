@@ -112,3 +112,15 @@ function saveRepliesToStorage() {
 
   localStorage.setItem('topics', JSON.stringify(topics));
 }
+
+// Add 'loaded' class to body after DOM is ready
+window.addEventListener('load', () => {
+  document.body.classList.add('loaded');
+});
+
+window.addEventListener('load', () => {
+  document.body.classList.add('loaded');
+});
+
+
+
