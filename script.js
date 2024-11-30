@@ -122,5 +122,94 @@ window.addEventListener('load', () => {
   document.body.classList.add('loaded');
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Quiz Page Loaded. Ready to play!");
+});
+
+
+
+///////  NEW CODE
+
+
+
+// Load topics from localStorage
+function loadTopics() {
+  const topics = JSON.parse(localStorage.getItem('topics')) || [];
+  const topicList = document.getElementById('topic-list');
+  topicList.innerHTML = '';
+  topics.forEach((topic) => {
+    const topicDiv = createTopicElement(topic);
+    topicList.appendChild(topicDiv);
+  });
+}
+
+// Create topic element
+function createTopicElement(topic) {
+  const topicDiv = document.createElement('div');
+  topicDiv.classList.add('topic');
+  topicDiv.innerHTML = `
+    <h4>${topic.title}</h4>
+    <p>${topic.content}</p>
+    <button class="reply-btn">Reply</button>
+    <div class="replies">${topic.replies.map(reply => `<p>${reply}</p>`).join('')}</div>
+    <form class="reply-form hidden">
+      <input type="text" placeholder="Your reply..." required />
+      <button type="submit">Post Reply</button>
+    </form>
+  `;
+  attachReplyFunctionality(topic, topicDiv);
+  return topicDiv;
+}
+
+// Attach reply functionality
+function attachReplyFunctionality(topic, topicDiv) {
+  const replyForm = topicDiv.querySelector('.reply-form');
+  const repliesDiv = topicDiv.querySelector('.replies');
+  const replyBtn = topicDiv.querySelector('.reply-btn');
+  replyBtn.addEventListener('click', () => {
+    replyForm.classList.toggle('hidden');
+  });
+  replyForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const replyText = replyForm.querySelector('input').value;
+    topic.replies.push(replyText);
+    saveTopics();
+    const replyP = document.createElement('p');
+    replyP.textContent = replyText;
+    repliesDiv.appendChild(replyP);
+    replyForm.reset();
+  });
+}
+
+// Save topics to localStorage
+function saveTopics() {
+  const topics = [...document.getElementById('topic-list').children].map(topicDiv => {
+    const title = topicDiv.querySelector('h4').textContent;
+    const content = topicDiv.querySelector('p').textContent;
+    const replies = [...topicDiv.querySelectorAll('.replies p')].map(reply => reply.textContent);
+    return { title, content, replies };
+  });
+  localStorage.setItem('topics', JSON.stringify(topics));
+}
+
+// Add new topic
+document.getElementById('new-topic-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const title = document.getElementById('topic-title').value;
+  const content = document.getElementById('topic-content').value;
+  const newTopic = { title, content, replies: [] };
+  const topicDiv = createTopicElement(newTopic);
+  document.getElementById('topic-list').appendChild(topicDiv);
+  saveTopics();
+  e.target.reset();
+});
+
+// Initialize
+document.addEventListener('DOMContentLoaded', loadTopics);
+
+
+
+
+
 
 
